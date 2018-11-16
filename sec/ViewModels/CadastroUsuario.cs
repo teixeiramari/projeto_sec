@@ -8,6 +8,10 @@ namespace sec.ViewModels
 {
     public class CadastroUsuario
     {
+        [Required(ErrorMessage = "O campo Nome é obrigatório!")]
+        [MaxLength(120, ErrorMessage = "O Nome não poderá ultrapassar 120 caracteres!")]
+        public string nome { get; set; }
+
         [Required(ErrorMessage = "O campo Nick é obrigatório!")]
         [MaxLength(50, ErrorMessage = "O nick não poderá ultrapassar 50 caracteres!")]
         public string nick { get; set; }

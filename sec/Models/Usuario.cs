@@ -17,7 +17,7 @@ namespace sec.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "O campo e-mail é obrigatório!")]
+        [Required(ErrorMessage = "O campo E-mail é obrigatório!")]
         [MaxLength(120, ErrorMessage = "O e-mail não poderá ultrapassar 120 caracteres!")]
         public string Email { get; set; }
 
@@ -28,9 +28,12 @@ namespace sec.Models
         [Required(ErrorMessage = "O campo Senha é obrigatório!")]
         public string Senha { get; set; }
 
+        [Required(ErrorMessage = "O campo Nome é obrigatório!")]
+        [MaxLength(120, ErrorMessage = "O nome não poderá ultrapassar 120 caracteres!")]
+        public string Nome { get; set; }
+
         public byte[] Foto { get; set; }
-
-
+        
         public virtual List<Preferencia> Preferencias { get; set; }
     }
 }

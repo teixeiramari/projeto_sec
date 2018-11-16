@@ -13,14 +13,17 @@ namespace sec.Models
         public Preferencia()
         {
             Usuarios = new List<Usuario>();
+            Arquivos = new List<Arquivo>();
         }
         [Key]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "A descrição é obrigatória")]
-        [MaxLength(120)]
+        [MaxLength(120, ErrorMessage = "A descrição não poderá ultrapassar 120 caracteres!")]
         public string Descricao { get; set; }
 
         public virtual List<Usuario> Usuarios { get; set; }
+
+        public virtual List<Arquivo> Arquivos { get; set; }
     }
 }
