@@ -188,6 +188,10 @@
     <Compile Include="Migrations\201811132340215_Inicio.Designer.cs">
       <DependentUpon>201811132340215_Inicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811170207078_atualizacaobd1.cs" />
+    <Compile Include="Migrations\201811170207078_atualizacaobd1.Designer.cs">
+      <DependentUpon>201811170207078_atualizacaobd1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Arquivo.cs" />
     <Compile Include="Models\Preferencia.cs" />
@@ -226,6 +230,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\FileUpload\Upload.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -241,7 +246,7 @@
     <Content Include="Views\Autenticacao\Login.cshtml" />
     <Content Include="Views\Autenticacao\Cadastrar.cshtml" />
     <Content Include="Views\Autenticacao\Index.cshtml" />
-    <Content Include="Views\Autenticacao\Upload.cshtml" />
+    <Content Include="Views\FileUpload\Upload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -263,6 +268,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811132340215_Inicio.resx">
       <DependentUpon>201811132340215_Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811170207078_atualizacaobd1.resx">
+      <DependentUpon>201811170207078_atualizacaobd1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

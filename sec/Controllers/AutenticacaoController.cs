@@ -51,6 +51,7 @@ namespace sec.Controllers
 
             Usuario u = new Usuario
             {
+                Nome = dto.nome,
                 Email = dto.email,
                 Nick = dto.nick,
                 Senha = dto.senha

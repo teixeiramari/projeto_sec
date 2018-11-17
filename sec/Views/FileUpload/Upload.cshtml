@@ -2,7 +2,6 @@
 @{
 
 }
-
 <!DOCTYPE html>
 
 <html>
@@ -12,21 +11,18 @@
 </head>
 <body>
     <div class="container">
-       <h2>Upload</h2>
+        <h2>Upload</h2>
         <h3>@Html.Encode(ViewData["Message"])</h3>
-        @Html.BeginForm("FileUpload", "FileUpload", FormMethod.Post, new {enctype = "multipart/form-data" } ))
+        @Html.BeginForm("FileUpload", "FileUpload", FormMethod.Post, new { enctype = "multipart/form-data" }))
 
-        <fieldset>
-            <input id="file" type="submit" />
-            <input type="submit" value="Enviar" />
-        </fieldset>
-    </div>
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
+        <div>
+            @Html.TextBox("file", "", new { type = "file" }) <br />
+            <input type="submit" value="Upload" />
+        </div>
     </div>
 </body>
 </html>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/script/Upload.js")
 }
