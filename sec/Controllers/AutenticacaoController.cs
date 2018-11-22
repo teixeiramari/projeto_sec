@@ -31,6 +31,7 @@ namespace sec.Controllers
             {
                 // redirecionado para a parte do painel
                 return RedirectToAction("Index", "Inicio");
+
             }
             else
             {
