@@ -16,7 +16,7 @@ namespace sec.App_Start
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = "ApplicationCookie",
-                LoginPath = new PathString("/Autenticacao/"),
+                LoginPath = new PathString("/Autenticacao/Login"),
 
 
             });

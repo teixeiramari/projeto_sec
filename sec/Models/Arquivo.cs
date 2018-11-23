@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-
 namespace sec.Models
 {
     [Table("Arquivo")]
@@ -33,6 +32,12 @@ namespace sec.Models
 
         [Required]
         public string Caminho { get; set; }
+
+        
+        public int IdUsuario { get; set; }
+
+        [ForeignKey("IdUsuario")]
+        public virtual Usuario Usuario { get; set; }
 
         public virtual List<Preferencia> Preferencias { get; set; }
     }

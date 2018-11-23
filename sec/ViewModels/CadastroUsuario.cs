@@ -18,6 +18,8 @@ namespace sec.ViewModels
 
         [Required(ErrorMessage = "O campo e-mail é obrigatório!")]
         [MaxLength(120, ErrorMessage = "O e-mail não poderá ultrapassar 120 caracteres!")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Digite um e-mail!")]
         public string email { get; set; }
 
         [Required(ErrorMessage = "Informe sua senha")]
@@ -31,5 +33,7 @@ namespace sec.ViewModels
         [MinLength(6, ErrorMessage = "A senha deve ter pelo menos 6" + "caracteres")]
         [Compare(nameof(senha), ErrorMessage = "A senha e a" + "confirmação não estão iguais")]
         public string confirmasenha { get; set; }
+
+        public HttpPostedFileBase foto { get; set; }
     }
 }

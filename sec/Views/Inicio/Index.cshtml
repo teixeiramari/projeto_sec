@@ -1,7 +1,96 @@
-﻿
+﻿@model sec.Models.Usuario
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Início";
+    int i = 0;
 }
+<style>
 
-<h2>Index</h2>
-<h1>@ViewBag.marilinda</h1>
+ 
+</style>
+<div class="row">
+    <div class="col-md-3 h-100 p-4 bg-danger" style="color: white; min-height: 100%;">
+        <div class="grupo-perfil" style="text-align: center;">
+            <i class="fa fa-user-circle" id="imgPadrao" style="font-size: 4.5rem; color: white;"></i>
+        </div>
+        <div class="grupo-perfil" style="text-align: center;">
+            <h2>@Model.Nome</h2>
+            <h3>@Model.Nick</h3>
+        </div>
+        <div class="grupo-perfil">
+            <h3>Preferências</h3>
+            @foreach (var pref in Model.Preferencias)
+            {
+                <div class="chip">
+                    @pref.Descricao
+                    <small class="close" ref="@pref.Id">x</small>
+                </div>
+            }
+        </div>
+        <div class="grupo-perfil">
+            <div style="text-align: center;">
+ 
+                    <button class="btn btn-primary" style="width: 60%;">Anexar Preferência</button>
+
+             
+            </div>
+        </div>
+        <div class="grupo-fim">
+
+            <button class="btn btn-block">Arquivos</button>
+        </div>
+
+    </div>
+    <div class="col-md-9">
+        @foreach(var usu in Model.Amigos)
+        {
+            foreach(var arq in usu.Arquivos.Where(a => a.Preferencias.Any(s => Model.Preferencias.Select(p => p.Id).Contains(s.Id))))
+            {
+                <div class="card">
+                    <div class="cabecario border-bottom pt-4 pl-3 pr-3 pb-3">
+                        <div class="row ">
+                            <div class="col-md-6">
+
+                                @if (usu.Foto == null)
+                                {
+                                    <i class="fa fa-user-circle" id="imgPadrao" style="font-size: 2rem;"></i>
+                                }
+                                <span>@usu.Nome</span>
+                            </div>
+                            <div class="col-md-6" style="text-align: right; ">
+                                @{
+                                    i = 0;
+                                    foreach (var tag in arq.Preferencias)
+                                    {
+                                        if (i == 0)
+                                        {
+                                            <span class="border">@tag.Descricao</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="border">, @tag.Descricao</span>
+                                        }
+
+                                        i++;
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: right" class="mr-3 mt-3">
+                        <a href="@Url.Action("DownloadArq", "FileUpload", new { id = arq.Id})" class=""><i class="fa fa-download" style="font-size: 1.3rem;"></i></a>
+                    </div>
+                    <div style="text-align: center" class="border-bottom pt-3 pl-3 pr-3 pb-3">
+                        <img src="@Url.Action("DownloadArq", "FileUpload", new { id = arq.Id})" style="min-height: 100px; max-height: 500px;" />
+                    </div>
+                    <div class="pt-4 pl-3 pr-3 pb-3">
+                        <form class="form-inline">
+                            <textarea placeholder="Comentar..." class="form-control mb-2 mr-sm-2 col-md-11 col-sm-6"></textarea>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

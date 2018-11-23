@@ -13,6 +13,7 @@ namespace sec.Models
         public Usuario()
         {
             Preferencias = new List<Preferencia>();
+            Amigos = new List<Usuario>();
         }
         [Key]
         public int Id { get; set; }
@@ -34,6 +35,11 @@ namespace sec.Models
 
         public byte[] Foto { get; set; }
         
+        [NotMapped]
+        public string UrlRetorno { get; set; }
         public virtual List<Preferencia> Preferencias { get; set; }
+        public virtual List<Arquivo> Arquivos { get; set; }
+        public virtual List<Usuario> Amigos { get; set; }
+
     }
 }

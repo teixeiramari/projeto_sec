@@ -1,7 +1,9 @@
-﻿using System;
+﻿using sec.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,7 +11,7 @@ namespace sec.Controllers
 {
     public class FileUploadController : Controller
     {
-        //
+        private SecContext db = new SecContext();
         // GET: /FileUpload/
 
         public ActionResult Index()
@@ -39,6 +41,17 @@ namespace sec.Controllers
 
             ViewData["Message"] = String.Format("{0} arquivo(s) salvo(s) com sucesso.",  arquivosSalvos);
             return View("Upload");
+        }
+        public FileContentResult DownloadArq(int id)
+        {
+            
+
+            var arq = db.Arquivos.Find(id);
+
+            if (arq != null)
+                return File(arq.Arq,  System.Net.Mime.MediaTypeNames.Application.Octet, arq.Descricao + ".jpg");
+            else
+                return null;
         }
     }
 }

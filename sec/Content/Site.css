@@ -1,24 +1,44 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿html, body, .container-fluid, .row {
+    height: 100%;
 }
+.main-wrapper{
+    height: 100%;
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
 }
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.background-azulsec {
+    background-color: rgb(41, 169, 225);
+    color: white;
 }
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.color-azulsec {
+   color: rgb(41, 169, 225);
+}
+.grupo-perfil{
+    margin-bottom: 1rem;
+}
+.chip {
+    display: inline-block;
+    padding: 0 25px;
+    height: 3rem;
+    font-size: 14px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: white;
+    color: black;
+    margin: 0.5rem;
+}
+.close {
+    cursor: pointer;
+    font-size: 1.2rem;
+    position: relative;
+    right: -0.7rem;
+    top: 0.90rem;
+}
+.grupo-fim {
+    position: absolute;
+    bottom: 1rem;
+    left: 20%;
+    width: 60%;
+}
+.card{
+    margin-top: 1rem;
 }

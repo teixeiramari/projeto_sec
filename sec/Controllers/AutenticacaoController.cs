@@ -3,6 +3,7 @@ using sec.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,8 +19,9 @@ namespace sec.Controllers
         {
             return View();
         }
-        public ActionResult Login()
+        public ActionResult Login(string ReturnUrl)
         {
+            ViewBag.returnUrl = ReturnUrl;
             return View();
         }
 
@@ -29,12 +31,26 @@ namespace sec.Controllers
             var usuario = db.Usuarios.Where(u => u.Nick == usu.Nick && u.Senha == usu.Senha).FirstOrDefault();
             if(usuario != null)
             {
-                // redirecionado para a parte do painel
-                return RedirectToAction("Index", "Inicio");
+                var identity = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, usuario.Nick),
+                    new Claim(ClaimTypes.NameIdentifier, usuario.Nome),
+                    new Claim("Id", usuario.Id.ToString())
+                }, "ApplicationCookie");
+
+
+                Request.GetOwinContext().Authentication.SignIn(identity);
+
+                if (!String.IsNullOrWhiteSpace(usu.UrlRetorno) ||
+                    Url.IsLocalUrl(usu.UrlRetorno))
+                    return Redirect(usu.UrlRetorno);
+                else
+                    return RedirectToAction("", "Inicio");
 
             }
             else
             {
+                ViewBag.erroLogin = "Usuário não existe!";
                 return View("Login");
             }
            
@@ -59,7 +75,7 @@ namespace sec.Controllers
             };
             db.Usuarios.Add(u);
             db.SaveChanges();
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Login");
         }
     }
 }

@@ -15,5 +15,11 @@ namespace sec.Models
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Preferencia> Preferencias { get; set; }
         public DbSet<Arquivo> Arquivos { get; set; }
+
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Usuario>().HasMany(m => m.Amigos).WithMany();
+        }
     }
 }
