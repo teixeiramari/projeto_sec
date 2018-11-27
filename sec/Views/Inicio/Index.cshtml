@@ -4,8 +4,6 @@
     int i = 0;
 }
 <style>
-
- 
 </style>
 <div class="row">
     <div class="col-md-3 h-100 p-4 bg-danger" style="color: white; min-height: 100%;">
@@ -22,16 +20,16 @@
             {
                 <div class="chip">
                     @pref.Descricao
-                    <small class="close" ref="@pref.Id">x</small>
+                    <small class="close-pref" ref="@pref.Id">x</small>
                 </div>
             }
         </div>
         <div class="grupo-perfil">
             <div style="text-align: center;">
- 
-                    <button class="btn btn-primary" style="width: 60%;">Anexar Preferência</button>
 
-             
+                <button class="btn btn-primary" id="anexarPref" style="width: 60%;">Anexar Preferência</button>
+
+
             </div>
         </div>
         <div class="grupo-fim">
@@ -41,9 +39,9 @@
 
     </div>
     <div class="col-md-9">
-        @foreach(var usu in Model.Amigos)
+        @foreach (var usu in Model.Amigos)
         {
-            foreach(var arq in usu.Arquivos.Where(a => a.Preferencias.Any(s => Model.Preferencias.Select(p => p.Id).Contains(s.Id))))
+            foreach (var arq in usu.Arquivos.Where(a => a.Preferencias.Any(s => Model.Preferencias.Select(p => p.Id).Contains(s.Id))))
             {
                 <div class="card">
                     <div class="cabecario border-bottom pt-4 pl-3 pr-3 pb-3">
@@ -94,3 +92,73 @@
         }
     </div>
 </div>
+<div class="modal fade" id="modalPreferencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="~/Inicio/AdicionarReferencia">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Preferências</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="preferencias">
+                                    @foreach (sec.Models.Preferencia pref in ViewBag.preferencias)
+                                    {
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="preferencias" value="@pref.Id" @(Model.Preferencias.Select(a => a.Id).Contains(pref.Id) ? "checked" : "") id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                                @pref.Descricao
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+       
+   
+    
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="addPref" data-dismiss="modal">Adicionar Preferência</button>
+                <button type="submit" class="btn btn-primary">Confirmar</button>
+            </div>
+                     </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="AdicionarPref" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="~/Inicio/CadastrarPref">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Adicionar Preferência</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="text" name="desc" class="form-control" placeholder="Adicionar preferência" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/ScriptSEC/Inicio.js")
+}
