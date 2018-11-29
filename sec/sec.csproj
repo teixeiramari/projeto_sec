@@ -224,6 +224,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Imagens\Logo.png" />
     <Content Include="Content\Imagens\logo_branca.png" />
+    <Content Include="Content\Imagens\Quadro.jpg" />
     <Content Include="Content\Login.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />

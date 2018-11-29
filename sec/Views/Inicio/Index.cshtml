@@ -54,6 +54,7 @@
                                 {
                                     <i class="fa fa-user-circle" id="imgPadrao" style="font-size: 2rem;"></i>
                                 }
+                           
                                 <span>@usu.Nome</span>
                             </div>
                             <div class="col-md-6" style="text-align: right; ">
@@ -81,7 +82,8 @@
                         <a href="@Url.Action("DownloadArq", "FileUpload", new { id = arq.Id})" class=""><i class="fa fa-download" style="font-size: 1.3rem;"></i></a>
                     </div>
                     <div style="text-align: center" class="border-bottom pt-3 pl-3 pr-3 pb-3">
-                        <img src="@Url.Action("DownloadArq", "FileUpload", new { id = arq.Id})" style="min-height: 100px; max-height: 500px;" />
+                        <img src="~/Content/Imagens/Quadro.jpg" alt="fisica1" style="max-height: 400px; max-width: 600px;" />
+                        @*<img src="@Url.Action("DownloadArq", "FileUpload", new { id = arq.Id})" style="min-height: 100px; max-height: 500px;" />*@
                     </div>
                     <div class="pt-4 pl-3 pr-3 pb-3">
                         <form class="form-inline">
