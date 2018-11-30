@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AutenticacaoController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +213,7 @@
     <Compile Include="ViewModels\CadastroArquivo.cs" />
     <Compile Include="ViewModels\CadastroPreferencia.cs" />
     <Compile Include="ViewModels\CadastroUsuario.cs" />
+    <Compile Include="ViewModels\MeuTodosUsuarios.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -309,6 +311,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
