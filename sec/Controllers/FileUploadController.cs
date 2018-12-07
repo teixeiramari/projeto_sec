@@ -19,6 +19,11 @@ namespace sec.Controllers
             return View();
         }
 
+        public ActionResult Upload()
+        {
+            return View();
+        }
+
         public ActionResult FileUpload()
         {
             int arquivosSalvos = 0;
