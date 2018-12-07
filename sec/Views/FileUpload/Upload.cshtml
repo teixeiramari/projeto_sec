@@ -2,27 +2,89 @@
 @{
     ViewBag.Title = "Upload";
 }
-<!DOCTYPE html>
 
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Upload</title>
-    </head>
-    <body>
-        <div class="container">
-            <h2>Upload</h2>
-            <h3>@Html.Encode(ViewData["Message"])</h3>
-            @Html.BeginForm("FileUpload", "FileUpload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<div class="row">
+    <div class="col-md-3 p-4 bg-danger" style="color: white;height: calc(100vh - 71px);">
+        <div class="grupo-perfil" style="text-align: center;">
+            <i class="fa fa-user-circle" id="imgPadrao" style="font-size: 4.5rem; color: white;"></i>
+        </div>
+        <div class="grupo-perfil" style="text-align: center;">
+            <h2>@Model.Eu.Nome</h2>
+        </div>
+    </div>
+    <div class="col-md-9 border">
+        <div class="row">
+            <div class="col-md-12">
 
-            <div>
-                @Html.TextBox("file", "", new { type = "file" }) <br />
-                <input type="submit" value="Upload" />
+                <h3>@ViewBag.retorno</h3>
             </div>
         </div>
-    </body>
-</html>
-@section Scripts {
+        <div class="row">
+            <div class="offset-md-3 col-md-6 shadow">
+                @using (Html.BeginForm("FileUpload", "FileUpload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                            <h3>Upload de arquivo</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 pb-4 mb-2 border-bottom">
+                            <label>Descrição</label>
+                            @Html.TextAreaFor(model => model.Descricao, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 pb-4 mb-2 border-bottom">
+
+                            <div class="custom-file">
+                                @Html.TextBoxFor(model => model.Arqs, "", new { type = "file", multiple = "multiple", @class = "custom-file-input" })
+                                <label class="custom-file-label" for="inputGroupFile01">Escolha o arquivo</label>
+                            </div>
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.Arqs)</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 " style="text-align: center;">
+                            <h4>Preferências</h4>
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.Prefs)</span>
+                        </div>
+                        <div class="col-md-12 pb-4 DivPreferencias">
+                            @foreach (var pref in Model.Preferencias)
+                            {
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="Prefs" value="@pref.Id">
+                                    <label class="form-check-label">@pref.Descricao</label>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="col-md-12  pb-4 mb-2 border-bottom" style="text-align: center;">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="txtPreferencia" placeholder="Nome Preferência" aria-label="Adicionar Preferência" aria-describedby="addPreferencia">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button" id="addPreferencia">Adicionar Preferência</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 pb-2 mb-2 " style="text-align: right;">
+                            <input type="submit" class="btn" value="Upload" />
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/script/Upload.js")
+    @Scripts.Render("~/ScriptSEC/Inicio.js")
+    @Scripts.Render("~/ScriptSEC/Arquivo.js")
 }

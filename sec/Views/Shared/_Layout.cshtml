@@ -10,7 +10,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="navbar navbar-dark background-azulsec">
+    <nav class="navbar navbar-dark background-azulsec fixed-top">
         <a class="navbar-brand" href="~/"><img src="~/Content/Imagens/logo_branca.png" width="180" height="45" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,7 @@
                     <a class="nav-link" href="~/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="~/FileUpload">Upload arquivo</a>
+                    <a class="nav-link" href="~/FileUpload/Upload">Upload arquivo</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="#">Chamada</a>
@@ -51,7 +51,7 @@
  
         </div>
     </nav>
-    <div class="main-wrapper">
+    <div class="main-wrapper" style="margin-top: 71px;">
         <div class="container-fluid">
             @RenderBody()
 

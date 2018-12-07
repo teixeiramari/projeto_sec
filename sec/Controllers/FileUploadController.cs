@@ -1,4 +1,5 @@
 ﻿using sec.Models;
+using sec.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace sec.Controllers
 {
+    [Authorize]
     public class FileUploadController : Controller
     {
         private SecContext db = new SecContext();
@@ -21,42 +23,92 @@ namespace sec.Controllers
 
         public ActionResult Upload()
         {
-            return View();
+            var identity = User.Identity as ClaimsIdentity;
+            ViewBag.retorno = ViewData["Message"];
+            ViewData["Message"] = null;
+            int id = Convert.ToInt32(identity.Claims.FirstOrDefault(c => c.Type == "Id").Value);
+
+            var usuario = db.Usuarios.Find(id);
+            CadastroArquivo visao = new CadastroArquivo {
+                Eu = usuario,
+                Preferencias = db.Preferencias.ToList()
+         
+            };
+            return View(visao);
         }
 
-        public ActionResult FileUpload()
+        public ActionResult FileUpload(CadastroArquivo model)
         {
-            int arquivosSalvos = 0;
-            for (int i = 0; i < Request.Files.Count; i++)
+            var identity = User.Identity as ClaimsIdentity;
+
+            int id = Convert.ToInt32(identity.Claims.FirstOrDefault(c => c.Type == "Id").Value);
+
+            var usuario = db.Usuarios.Find(id);
+            if (model.Prefs == null)
             {
-                HttpPostedFileBase arquivo = Request.Files[i];
 
-                //Suas validações ......
-
-                //Salva o arquivo
-                if (arquivo.ContentLength > 0)
+                CadastroArquivo visao = new CadastroArquivo
                 {
-                    var uploadPath = Server.MapPath("~/Content/Uploads");
-                    string caminhoArquivo = Path.Combine(@uploadPath, Path.GetFileName(arquivo.FileName));
+                    Eu = usuario,
+                    Preferencias = db.Preferencias.ToList()
 
-                    arquivo.SaveAs(caminhoArquivo);
-                    arquivosSalvos++;
-                }
+                };
+                ModelState.AddModelError("Prefs", "Selecione ao menos uma preferência");
+                return View("Upload", visao);
             }
-
-            ViewData["Message"] = String.Format("{0} arquivo(s) salvo(s) com sucesso.",  arquivosSalvos);
-            return View("Upload");
+            foreach(var arq in model.Arqs)
+            {
+                var byteDoArq = ArqParaByte(arq);
+                Arquivo a = new Arquivo
+                {
+                    Arq = byteDoArq,
+                    Caminho = arq.FileName,
+                    IdUsuario = id,
+                     Descricao = model.Descricao,
+                     extensao = arq.ContentType
+                };
+                foreach(var p in model.Prefs)
+                {
+                    a.Preferencias.Add(db.Preferencias.Find(p));
+                }
+                db.Arquivos.Add(a);
+                db.SaveChanges();
+            }
+            ViewData["Message"] = "Arquivos salvos com sucesso!";
+            return RedirectToAction("Upload");
         }
-        public FileContentResult DownloadArq(int id)
+        public static byte[] ArqParaByte(HttpPostedFileBase arq)
         {
-            
-
-            var arq = db.Arquivos.Find(id);
-
             if (arq != null)
-                return File(arq.Arq,  System.Net.Mime.MediaTypeNames.Application.Octet, arq.Descricao + ".jpg");
+            {
+                byte[] novoArq = new byte[arq.ContentLength];
+                arq.InputStream.Read(novoArq, 0, arq.ContentLength);
+                return novoArq;
+            }
             else
                 return null;
+        }
+
+        public JsonResult AddPreferencia(string nome)
+        {
+            if (string.IsNullOrEmpty(nome))
+                return null;
+            Preferencia p = new Preferencia
+            {
+                Descricao = nome
+            };
+            db.Preferencias.Add(p);
+            db.SaveChanges();
+            return Json(new { Id = p.Id, Descricao = p.Descricao });
+        }
+        public FileContentResult DownloadArquivo(int id)
+        {
+
+            var arq = db.Arquivos.Find(id);
+            if (arq == null)
+                return null;
+            return File(arq.Arq, arq.extensao, arq.Caminho);
+
         }
     }
 }

@@ -6,15 +6,15 @@
 <style>
 </style>
 <div class="row">
-    <div class="col-md-3 p-4 bg-danger" style="color: white;height: calc(100vh - 71px);">
+    <div class="col-md-3 p-4 bg-danger" style="color: white;height: calc(100vh - 71px); position: fixed;">
         <div class="grupo-perfil" style="text-align: center;">
             <i class="fa fa-user-circle" id="imgPadrao" style="font-size: 4.5rem; color: white;"></i>
         </div>
-        <div class="grupo-perfil" style="text-align: center;">
+        <div class="grupo-perfil" style="text-align: center; ">
             <h2>@Model.Nome</h2>
             <h3>@Model.Nick</h3>
         </div>
-        <div class="grupo-perfil">
+        <div class="grupo-perfil" style="max-height: 220px; overflow-y: auto;">
             <h3>Preferências</h3>
             @foreach (var pref in Model.Preferencias)
             {
@@ -38,7 +38,7 @@
         </div>
 
     </div>
-    <div class="col-md-9">
+    <div class="offset-md-3 col-md-9 ">
         @foreach (var usu in Model.Amigos)
         {
             foreach (var arq in usu.Arquivos.Where(a => a.Preferencias.Any(s => Model.Preferencias.Select(p => p.Id).Contains(s.Id))))
@@ -77,11 +77,10 @@
                         </div>
                     </div>
                     <div style="text-align: right" class="mr-3 mt-3">
-                        <a href="@Url.Action("DownloadArq", "FileUpload", new { id = arq.Id})" class=""><i class="fa fa-download" style="font-size: 1.3rem;"></i></a>
+                        <a href="@Url.Action("DownloadArquivo", "FileUpload", new { id = arq.Id})" class=""><i class="fa fa-download" style="font-size: 1.3rem;"></i></a>
                     </div>
                     <div style="text-align: center" class="border-bottom pt-3 pl-3 pr-3 pb-3">
-                        <img src="~/Content/Imagens/Quadro.jpg" alt="fisica1" style="max-height: 400px; max-width: 600px;" />
-                        @*<img src="@Url.Action("DownloadArq", "FileUpload", new { id = arq.Id})" style="min-height: 100px; max-height: 500px;" />*@
+                        <img src="@Url.Action("DownloadArquivo", "FileUpload", new { id = arq.Id})" style="min-height: 100px; max-height: 300px;" />
                     </div>
                     <div class="pt-4 pl-3 pr-3 pb-3">
                         <form class="form-inline">

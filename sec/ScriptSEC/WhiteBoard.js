@@ -1,23 +1,28 @@
-﻿$('.salvaDesenho').on('click', function () {
-    PrintElem('whiteboard');
+﻿$('#slcAmigo').on('change', function () {
+    var idAmigo = parseInt($(this).val());
+    if (idAmigo > 0) {
+        var html = '';
+        var nomeAmigo = $(this).find(':selected').text();
+        html += '<div class="chip">' + nomeAmigo + '<small class="close-pref removeMigo" ref="' + idAmigo + '">x</small></div>';
+        $('option:selected', this).remove();
+        $('#divAmigos').append(html);
+        $('.removeMigo').on('click', function () {
+            var nomeMigo = $(this).parent().text();
+            nomeMigo = nomeMigo.slice(0, -1);
+            var idMigo = parseInt($(this).attr('ref'));
+            var idsSelect = [];
+            $('#slcAmigo').find('option').each(function (item) {
+                idsSelect.push(parseInt($(this).val()));
+            });
+            if (!idsSelect.includes(idMigo)) {
+                $("#slcAmigo").append(new Option(nomeMigo, idMigo));
+                $(this).parent().remove();
+            }
+    
+        });
+    }
 });
-function PrintElem(elem) {
-    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
 
-    mywindow.document.write('<html><head><title>' + document.title + '</title>');
-    mywindow.document.write('</head><body >');
-    mywindow.document.write('<h1>' + document.title + '</h1>');
-    mywindow.document.write(document.getElementById(elem).innerHTML);
-    mywindow.document.write('</body></html>');
-
-    mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10*/
-
-    mywindow.print();
-    mywindow.close();
-
-    return true;
-}
 window.onload = function () {
     var myCanvas = document.getElementById("whiteboard");
     var ctx = myCanvas.getContext("2d");
@@ -102,3 +107,4 @@ window.onload = function () {
         evt.preventDefault();
     }, false);
 };
+

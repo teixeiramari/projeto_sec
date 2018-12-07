@@ -15,9 +15,9 @@
 .chip {
     display: inline-block;
     padding: 0 25px;
-    height: 3rem;
-    font-size: 14px;
-    line-height: 50px;
+    height: 2rem;
+    font-size: 12px;
+    line-height: 1.7rem;
     border-radius: 25px;
     background-color: white;
     color: black;

@@ -23,17 +23,12 @@ namespace sec.Models
         [MaxLength(250, ErrorMessage = "A descrição não poderá ultrapassar 250 caracteres!")]
         public string Descricao { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string Extensao { get; set; }
-
-        [Required]
-        public int Tamanho { get; set; }
 
         [Required]
         public string Caminho { get; set; }
 
-        
+        public string extensao { get; set; }
+
         public int IdUsuario { get; set; }
 
         [ForeignKey("IdUsuario")]

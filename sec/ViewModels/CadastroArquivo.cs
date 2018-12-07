@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sec.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,20 +9,19 @@ namespace sec.ViewModels
 {
     public class CadastroArquivo
     {
-        [Required(ErrorMessage = "O campo Arquivo é obrigatório!")]
-        public byte[] Arq { get; set; }
+        [Required(ErrorMessage = "Adicione ao menos um arquivo!")]
+        public HttpPostedFileBase[] Arqs { get; set; }
 
         [MaxLength(250, ErrorMessage = "A descrição não poderá ultrapassar 250 caracteres!")]
         public string Descricao { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string Extensao { get; set; }
+        public string NomeArquivo { get; set; }
 
-        [Required]
-        public int Tamanho { get; set; }
+        [Required(ErrorMessage = "Adicione ao menos uma preferência!")]
+        public int[] Prefs { get; set; }
+         
+        public virtual Usuario Eu { get; set; }
 
-        [Required]
-        public string Caminho { get; set; }
+        public virtual List<Preferencia> Preferencias { get; set; }
     }
 }

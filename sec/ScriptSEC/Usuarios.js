@@ -1,6 +1,6 @@
 ﻿$('#buscaUsuario').on('keyup', function () {
     FiltrarAmigo();
-    FiltrarOutros() 
+    FiltrarOutros();
 });
 function FiltrarAmigo() {
     var input, filter, table, tr, td, i, txtValue;
