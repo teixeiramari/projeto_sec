@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     $('#file').MultiFile({
-        accept: 'gif|jpg',
-        max: 3,
+        accept: 'gif|jpg|pdf|png',
+        max: 5,
         STRING: {
             remove: 'Remover',
             denied: 'Tipo do arquivo inválido $ext!',
