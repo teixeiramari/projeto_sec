@@ -4,12 +4,30 @@
 }
 
 <div class="row">
-    <div class="col-md-12">
-        <canvas id="whiteboard">
-            Desculpe, Seu Browser não suporta HTML 5 Canvas!
-        </canvas>
+    <div class="col-md-3 p-4 bg-danger" style="color: white; position: absolute; height: calc(100vh - 71px)">
+        <div class="grupo-perfil" style="text-align: center;">
+            <i class="fa fa-user-circle" id="imgPadrao" style="font-size: 4.5rem; color: white;"></i>
+        </div>
+        <div class="grupo-perfil">
+            <div style="text-align: center;">
+                <h3>Convidar Amigos</h3>
+            </div>
+                @Html.DropDownList("slcAmigo", ViewBag.usuarios as SelectList, "Selecione", new { @class="form-control"})
+    
+        </div>
+
+    </div>
+    <div class="offset-md-3 col-md-9 ">
+        <div class="row">
+            <div class="col-md-12 shadow mt-2">
+                <canvas id="whiteboard" class="shadow"></canvas>
+            </div>
+        </div>
+
+
     </div>
 </div>
 @section scripts{
+
     @Scripts.Render("~/ScriptSEC/WhiteBoard.js")
 }

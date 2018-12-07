@@ -1,4 +1,7 @@
-﻿function PrintElem(elem) {
+﻿$('.salvaDesenho').on('click', function () {
+    PrintElem('whiteboard');
+});
+function PrintElem(elem) {
     var mywindow = window.open('', 'PRINT', 'height=400,width=600');
 
     mywindow.document.write('<html><head><title>' + document.title + '</title>');
@@ -20,8 +23,8 @@ window.onload = function () {
     var ctx = myCanvas.getContext("2d");
 
     // Fill Window Width and Height
-    myCanvas.width = window.innerWidth;
-    myCanvas.height = window.innerHeight;
+    myCanvas.width = window.innerWidth - 100;
+    myCanvas.height = window.innerHeight - 100;
 
     // Set Background Color
     ctx.fillStyle = "#fff";

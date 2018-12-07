@@ -67,7 +67,14 @@
                                         }
                                     }
                                 </td>
-                                <td><a href="#" ref="@migo.Id" class="fa fa-user-minus" style="font-size: 21px;"></a></td>
+                                <td>
+                                    <form action="~/Usuarios/RemoverAmigo">
+                                        <input type="hidden" name="id" value="@migo.Id" />
+                                        <button class="btn" type="submit" style="font-size: 21px;">
+                                            <img src="~/Content/Imagens/user-minus-solid.svg" style="width: 24px; height: 21px;" />
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                         }
                     </tbody>
@@ -104,7 +111,12 @@
                                         }
                                     }
                                 </td>
-                                <td><a href="#" class="fa fa-user-plus" style="font-size: 21px;"></a></td>
+                                <td>
+                                    <form action="~/Usuarios/AdicionarAmigo">
+                                        <input type="hidden" name="id" value="@migo.Id" />
+                                        <button class="btn" type="submit" style="font-size: 21px;"><span class="fa fa-user-plus"></span></button>
+                                    </form>
+                                </td>
                             </tr>
                         }
                     </tbody>

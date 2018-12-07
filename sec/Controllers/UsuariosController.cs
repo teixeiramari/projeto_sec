@@ -32,6 +32,27 @@ namespace sec.Controllers
             return View(retorno);
 
         }
+        public ActionResult AdicionarAmigo(int id)
+        {
+            var identity = User.Identity as ClaimsIdentity;
+            int meuId = Convert.ToInt32(identity.Claims.FirstOrDefault(c => c.Type == "Id").Value);
+            var usuario = db.Usuarios.Find(meuId);
+            var amigo = db.Usuarios.Find(id);
+            usuario.Amigos.Add(amigo);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult RemoverAmigo(int id)
+        {
+            var identity = User.Identity as ClaimsIdentity;
+            int meuId = Convert.ToInt32(identity.Claims.FirstOrDefault(c => c.Type == "Id").Value);
+            var usuario = db.Usuarios.Find(meuId);
+            var amigo = db.Usuarios.Find(id);
+            usuario.Amigos.Remove(amigo);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        
         public ActionResult Logout()
         {
             Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
