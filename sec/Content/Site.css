@@ -43,3 +43,14 @@
     position: fixed;
 
 }
+.caixaChat {
+    background-color: #cccccc;
+    border-radius: 15px;
+    display: inline-block;
+    padding: 10px;
+    margin: 1rem;
+}
+.textoChamada{
+    position: fixed;
+    bottom: 1px;
+}

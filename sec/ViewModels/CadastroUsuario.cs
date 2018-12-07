@@ -35,5 +35,7 @@ namespace sec.ViewModels
         public string confirmasenha { get; set; }
 
         public HttpPostedFileBase foto { get; set; }
+
+        public int[] Prefs { get; set; }
     }
 }

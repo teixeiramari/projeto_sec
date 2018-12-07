@@ -57,6 +57,7 @@ namespace sec.Controllers
         }
         public ActionResult Cadastrar()
         {
+            ViewBag.preferencias = db.Preferencias.ToList();
             return View();
         }
 
@@ -64,7 +65,11 @@ namespace sec.Controllers
         public ActionResult Cadastrar(CadastroUsuario dto)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.preferencias = db.Preferencias.ToList();
                 return View(dto);
+            }
+           
 
             Usuario u = new Usuario
             {
@@ -76,6 +81,11 @@ namespace sec.Controllers
             db.Usuarios.Add(u);
             db.SaveChanges();
             return RedirectToAction("Login");
+        }
+
+        public ActionResult EscolherPreferencias(int id)
+        {
+            return View();
         }
     }
 }

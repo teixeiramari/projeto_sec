@@ -58,5 +58,14 @@ namespace sec.Controllers
             Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
             return RedirectToAction("Login", "Autenticacao");
         }
+
+        public ActionResult Arquivos()
+        {
+            ViewBag.preferencias = db.Preferencias.ToList();
+            var identity = User.Identity as ClaimsIdentity;
+            int meuId = Convert.ToInt32(identity.Claims.FirstOrDefault(c => c.Type == "Id").Value);
+            var usuario = db.Usuarios.Find(meuId);
+            return View(usuario);
+        }
     }
 }

@@ -180,7 +180,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AutenticacaoController.cs" />
+    <Compile Include="Controllers\ChamadasController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
+    <Compile Include="Controllers\GeralController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\WhiteBoardController.cs" />
@@ -246,6 +248,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ScriptSEC\Arquivo.js" />
+    <Content Include="ScriptSEC\Chat.js" />
     <Content Include="ScriptSEC\Inicio.js" />
     <Content Include="ScriptSEC\Usuarios.js" />
     <Content Include="ScriptSEC\WhiteBoard.js" />
@@ -293,6 +296,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Content\Imagens\user-circle-solid.svg" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ie_customevent.js" />
     <Content Include="Scripts\ie_setLineDash.js" />
@@ -379,6 +383,8 @@
     <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\FileUpload\Index.cshtml" />
     <Content Include="Views\WhiteBoard\Index.cshtml" />
+    <Content Include="Views\Chamadas\Index.cshtml" />
+    <Content Include="Views\Usuarios\Arquivos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,7 +10,7 @@
 @Scripts.Render("~/bundles/jqueryval")
 
 
-@using (Html.BeginForm("Cadastrar", "Autenticacao", null, FormMethod.Post, new { @class = "form-signin", @enctype= "multipart/form-data" }))
+@using (Html.BeginForm("Cadastrar", "Autenticacao", null, FormMethod.Post, new { @class = "form-signin", @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -46,9 +46,79 @@
         @Html.EditorFor(model => model.confirmasenha, new { htmlAttributes = new { @class = "form-control", @placeholder = "Confirmar Senha" } })
         @Html.ValidationMessageFor(model => model.confirmasenha, "", new { @class = "text-danger" })
     </div>
-    <input type="submit" value="Cadastrar" class="btn btn-lg btn-primary btn-block" />
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Adicionar Preferências</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-md-12 pb-4 DivPreferencias">
+                                @foreach (sec.Models.Preferencia pref in ViewBag.preferencias)
+                                {
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="Prefs" value="@pref.Id">
+                                        <label class="form-check-label">@pref.Descricao</label>
+                                    </div>
+                                }
+
+                            </div>
+                            <div class="col-md-12  pb-4 mb-2 border-bottom" style="text-align: center;">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="txtPreferencia" placeholder="Nome Preferência" aria-label="Adicionar Preferência" aria-describedby="addPreferencia">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button" id="addPreferencia">Adicionar Preferência</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Cadastrar" class="btn btn-lg btn-primary btn-block" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="button" value="Cadastrar" class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#exampleModal"/>
 }
 
 
 
 
+@section scripts {
+  <script>
+      $('#addPreferencia').on('click', function () {
+    var nomePref = $('#txtPreferencia').val();
+    $.ajax({
+        type: 'POST',
+        url: baseUrl + 'Geral/AddPreferencia',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify({ "nome": nomePref }),
+        success: function (resp) {
+            if (resp === null) {
+                alert("Digite o nome!");
+            }
+            else {
+                var html = '';
+                html += ' <div class="form-check form-check-inline">';
+                html += '<input class="form-check-input" type="checkbox" name="Prefs" value="' + resp.Id + '">';
+                html += '<label class="form-check-label">' + resp.Descricao + '</label>';
+                html += '</div>';
+                $('.DivPreferencias').append(html);
+                $('#txtPreferencia').val("");
+            }
+
+        },
+        error: function (error) { console.log(error); }
+    }).fail(function (error) { console.log(error); });
+});
+    </script>
+}

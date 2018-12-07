@@ -1,6 +1,6 @@
 ﻿@model sec.Models.Usuario
 @{
-    ViewBag.Title = "Início";
+    ViewBag.Title = "Chamadas";
     int i = 0;
 }
 <style>
@@ -32,65 +32,60 @@
 
             </div>
         </div>
-        <div class="grupo-fim">
-
-            <a href="~/Usuarios/Arquivos" class="btn btn-block btn-light">Arquivos</a>
-        </div>
+    
 
     </div>
     <div class="offset-md-3 col-md-9 ">
-        @foreach (var usu in Model.Amigos)
+        @foreach (var arq in Model.Arquivos)
         {
-            foreach (var arq in usu.Arquivos.Where(a => a.Preferencias.Any(s => Model.Preferencias.Select(p => p.Id).Contains(s.Id))))
-            {
-                <div class="card">
-                    <div class="cabecario border-bottom pt-4 pl-3 pr-3 pb-3">
-                        <div class="row ">
-                            <div class="col-md-6">
+            <div class="card">
+                <div class="cabecario border-bottom pt-4 pl-3 pr-3 pb-3">
+                    <div class="row ">
+                        <div class="col-md-6">
 
-                                @if (usu.Foto == null)
+                            @if (Model.Foto == null)
+                            {
+                                <i class="fa fa-user-circle" id="imgPadrao" style="font-size: 2rem;"></i>
+                            }
+
+                            <span>@Model.Nome</span>
+                        </div>
+                        <div class="col-md-6" style="text-align: right; ">
+                            @{
+                                i = 0;
+                                foreach (var tag in arq.Preferencias)
                                 {
-                                    <i class="fa fa-user-circle" id="imgPadrao" style="font-size: 2rem;"></i>
-                                }
-                           
-                                <span>@usu.Nome</span>
-                            </div>
-                            <div class="col-md-6" style="text-align: right; ">
-                                @{
-                                    i = 0;
-                                    foreach (var tag in arq.Preferencias)
+                                    if (i == 0)
                                     {
-                                        if (i == 0)
-                                        {
-                                            <span class="border">@tag.Descricao</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="border">, @tag.Descricao</span>
-                                        }
-
-                                        i++;
+                                        <span class="border">@tag.Descricao</span>
                                     }
-                                }
+                                    else
+                                    {
+                                        <span class="border">, @tag.Descricao</span>
+                                    }
 
-                            </div>
+                                    i++;
+                                }
+                            }
+
                         </div>
                     </div>
-                    <div style="text-align: right" class="mr-3 mt-3">
-                        <a href="@Url.Action("DownloadArquivo", "FileUpload", new { id = arq.Id})" class=""><i class="fa fa-download" style="font-size: 1.3rem;"></i></a>
-                    </div>
-                    <div style="text-align: center" class="border-bottom pt-3 pl-3 pr-3 pb-3">
-                        <img src="@Url.Action("DownloadArquivo", "FileUpload", new { id = arq.Id})" style="min-height: 100px; max-height: 300px;" />
-                    </div>
-                    <div class="pt-4 pl-3 pr-3 pb-3">
-                        <form class="form-inline">
-                            <textarea placeholder="Comentar..." class="form-control mb-2 mr-sm-2 col-md-11 col-sm-6"></textarea>
-                            <button type="submit" class="btn btn-primary">Enviar</button>
-                        </form>
-                    </div>
                 </div>
-            }
+                <div style="text-align: right" class="mr-3 mt-3">
+                    <a href="@Url.Action("DownloadArquivo", "FileUpload", new { id = arq.Id})" class=""><i class="fa fa-download" style="font-size: 1.3rem;"></i></a>
+                </div>
+                <div style="text-align: center" class="border-bottom pt-3 pl-3 pr-3 pb-3">
+                    <img src="@Url.Action("DownloadArquivo", "FileUpload", new { id = arq.Id})" style="min-height: 100px; max-height: 300px;" />
+                </div>
+                <div class="pt-4 pl-3 pr-3 pb-3">
+                    <form class="form-inline">
+                        <textarea placeholder="Comentar..." class="form-control mb-2 mr-sm-2 col-md-11 col-sm-6"></textarea>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
         }
+
     </div>
 </div>
 <div class="modal fade" id="modalPreferencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -122,14 +117,14 @@
                         </div>
                     </div>
                 </div>
-       
-   
-    
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="addPref" data-dismiss="modal">Adicionar Preferência</button>
-                <button type="submit" class="btn btn-primary">Confirmar</button>
-            </div>
-                     </form>
+
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="addPref" data-dismiss="modal">Adicionar Preferência</button>
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
