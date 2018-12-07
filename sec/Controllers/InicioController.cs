@@ -8,11 +8,12 @@ using System.Web.Mvc;
 
 namespace sec.Controllers
 {
+    [Authorize]
     public class InicioController : Controller
     {
         private SecContext db = new SecContext();
         // GET: Inicio
-        [Authorize]
+
         public ActionResult Index()
         {
             ViewBag.preferencias = db.Preferencias.ToList();

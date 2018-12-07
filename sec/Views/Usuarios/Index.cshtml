@@ -15,10 +15,7 @@
         </div>
         <div class="grupo-perfil">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Usuários" aria-label="Usuários" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" id="button-addon2">Pesquisar</button>
-                </div>
+                <input type="text" class="form-control" id="buscaUsuario" placeholder="Pesquisar Usuários" aria-label="Usuários" aria-describedby="button-addon2">
             </div>
         </div>
     </div>
@@ -40,7 +37,7 @@
     <div class="offset-md-3 col-md-9" style="text-align: center;">
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <table class="table table-striped">
+                <table class="table table-striped" id="tabelaAmigo">
                     <thead>
                         <tr>
                             <th>Nome</th>
@@ -51,33 +48,33 @@
                     <tbody>
                         @foreach (var migo in Model.Amigos)
                         {
-                        <tr>
-                            <td>@migo.Nick</td>
-                            <td>
-                                @{
-                                    int i = 0;
-                                    foreach (var pref in migo.Preferencias)
-                                    {
-                                        if (i == 0)
+                            <tr>
+                                <td>@migo.Nick</td>
+                                <td>
+                                    @{
+                                        int i = 0;
+                                        foreach (var pref in migo.Preferencias)
                                         {
-                                            @:@pref.Descricao
+                                            if (i == 0)
+                                            {
+                                                @:@pref.Descricao
+                                            }
+                                            else
+                                            {
+                                                @:/ @pref.Descricao
+                                            }
+                                            i++;
                                         }
-                                        else
-                                        {
-                                            @:/ @pref.Descricao
-                                        }
-                                        i++;
                                     }
-                                }
-                            </td>
-                            <td><a href="#" ref="@migo.Id" class="fa fa-user-minus" style="font-size: 21px;"></a></td>
-                        </tr>
-                                        }
+                                </td>
+                                <td><a href="#" ref="@migo.Id" class="fa fa-user-minus" style="font-size: 21px;"></a></td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <table class="table table-striped">
+                <table class="table table-striped" id="tabelaOutros">
                     <thead>
                         <tr>
                             <th>Nome</th>
@@ -117,3 +114,6 @@
         </div>
     </div>
 </div>
+@section scripts{
+    @Scripts.Render("~/ScriptSEC/Usuarios.js")
+}

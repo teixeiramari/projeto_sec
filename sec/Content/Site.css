@@ -41,3 +41,7 @@
 .card{
     margin-top: 1rem;
 }
+#whiteboard {
+    cursor: crosshair;
+    position: fixed;
+}

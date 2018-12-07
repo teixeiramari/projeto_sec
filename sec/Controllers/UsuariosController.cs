@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace sec.Controllers
 {
+    [Authorize]
     public class UsuariosController : Controller
     {
         private SecContext db = new SecContext();
@@ -30,6 +31,11 @@ namespace sec.Controllers
             retorno.Outros = db.Usuarios.Where(u => !zotro.Contains(u.Id)).ToList();
             return View(retorno);
 
+        }
+        public ActionResult Logout()
+        {
+            Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
+            return RedirectToAction("Login", "Autenticacao");
         }
     }
 }
