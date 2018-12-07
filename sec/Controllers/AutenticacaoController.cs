@@ -78,9 +78,25 @@ namespace sec.Controllers
                 Nick = dto.nick,
                 Senha = dto.senha
             };
+            if(dto.Prefs != null)
+            {
+                foreach(var pref in dto.Prefs)
+                {
+                    u.Preferencias.Add(db.Preferencias.Find(pref));
+                }
+            }
             db.Usuarios.Add(u);
             db.SaveChanges();
-            return RedirectToAction("Login");
+            var identity = new ClaimsIdentity(new[]
+              {
+                    new Claim(ClaimTypes.Name, u.Nick),
+                    new Claim(ClaimTypes.NameIdentifier, u.Nome),
+                    new Claim("Id", u.Id.ToString())
+                }, "ApplicationCookie");
+
+
+            Request.GetOwinContext().Authentication.SignIn(identity);
+            return RedirectToAction("Index", "Inicio");
         }
 
         public ActionResult EscolherPreferencias(int id)
