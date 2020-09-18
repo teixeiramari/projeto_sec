@@ -1,0 +1,5 @@
+# projeto_sec
+Após uma análise sobre CSCW (Computer Supported Cooperative Work - em português: Trabalho Cooperativo Auxiliado por Computador) e outros temas que abordam conteúdos semelhantes a este, com revisões em livros e artigos, além de fazer uma pesquisa sobre a aceitação do público alvo utilizando o método NetPromoter, constatou-se a possibilidade da criação de um sistema que suportasse a colaboração no ponto de vista acadêmico, dando apoio ao estudo de pessoas que não estejam no mesmo ambiente físico, porém têm o objetivo de estudar e aprender sobre diversos assuntos. 
+Com base no estudo realizado sobre assunto, este trabalho tem como objetivo principal o desenvolvimento de um sistema web que apoiará pessoas com o objetivo de estudo colaborativo, apresentando ferramentas que poderão ser utilizadas para esse fim. É apresentado também neste trabalho todo o processo de levantamento de requisito, com uma pesquisa sobre o assunto e a modelagem do sistema, utilizando diagramas e o processo de construção do sistema, apontando quais linguagens e ferramentas foram utilizadas. 
+
+Palavras-chave: CSCW, Colaboração, Aprendizagem, Sistema Web
